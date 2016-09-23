@@ -37,8 +37,11 @@ print "ffmpeg -i 'small/a%*.jpg' -r 30 -b 50M  -vf fade=out:$fadeout_start:$fade
 
 __END__
 連番ファイルからタイムラプス動画を作るスクリプト
+Requires: ImageMagick, ffmpeg
 
 Example:
+# In seq photos directory:
 mkdir small
-perl gen_sh.pl G%07d.JPG small/a%07d.jpg 20484 21657 75 75 1920 > a.sh
+perl ~/Dropbox/lab/Timelapse/gen_sh.pl G%07d.JPG small/a%07d.jpg 18488 19170 75 75 1920 > a.sh
 sh -x a.sh
+# Example output movie path: small/timelapse_Fri_Sep_23_22_32_09_2016.flv
