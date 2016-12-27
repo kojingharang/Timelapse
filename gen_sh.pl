@@ -33,6 +33,8 @@ $time =~ s/:/_/g;
 $fadeout_duration = 30;
 $fadeout_start = $count - $fadeout_duration;
 print "ffmpeg -i 'small/a%*.jpg' -r 30 -b 50M  -vf fade=out:$fadeout_start:$fadeout_duration small/timelapse_$time.flv\n";
+#twitter upload
+print "ffmpeg -i 'small/a%*.jpg' -r 30 -b 10M -vf \"scale=1280:-1, fade=out:$fadeout_start:$fadeout_duration\" small/timelapse_$time.twtr.flv\n";
 
 
 __END__
