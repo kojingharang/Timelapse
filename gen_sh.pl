@@ -18,6 +18,10 @@ $w = int(`identify -format "%[w]" $first`);
 $h = int(`identify -format "%[h]" $first`);
 $x_end = $w * (1 - ($crop_w / 100.0));
 
+$sw = int($resize_w / 2);
+$sh = int($sw / $w * $h);
+
+print "mkdir -p small\n";
 for($i=0;$i<$count;$i++) {
 	$in = filename($i);
 	$out = sprintf($out_format, $i);
@@ -33,6 +37,7 @@ $time =~ s/:/_/g;
 $fadeout_duration = 30;
 $fadeout_start = $count - $fadeout_duration;
 print "ffmpeg -i 'small/a%*.jpg' -r 30 -b 50M  -vf fade=out:$fadeout_start:$fadeout_duration small/timelapse_$time.flv\n";
+print "ffmpeg -i small/timelapse_$time.flv -b 5M -s ${sw}x${sh} small/timelapse_${time}_5m.mp4\n";
 
 
 __END__
